@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="indi.smt.dao.BlogDAO">
+
+	<sql id="allColumn">blog_id,blog_text,img_num,like_num,repeat_num,comment_num,create_date,device,place,bl</sql>
+
+	<select id="selectBlog" resultType="indi.smt.entity.Blog">
+		select <include refid="allColumn"></include> from blog
+    </select>
+    
+    <select id="selectBlogById" parameterType="java.lang.String" resultType="indi.smt.entity.Blog">
+    	select <include refid="allColumn"></include> from blog where blog_id = #{blog_id}
+    </select>
+
+	<insert id="insertBlog" parameterType="indi.smt.entity.Blog">
+		INSERT INTO blog (
+		  <include refid="allColumn"></include>
+		) VALUES (
+		  #{blog_id},#{blog_text},
+		  #{img_num},#{like_num},#{repeat_num},#{comment_num},
+		  #{create_date},
+		  #{device},#{place},#{bl}
+		)
+	</insert>
+
+</mapper>
